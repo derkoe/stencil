@@ -28,7 +28,17 @@ describe('app-core', () => {
   });
 
   describe('getAppPublicPath', () => {
+    it('concatinates public path and namespace', () => {
+      config.namespace = 'WillyWendLeSWeTWasaBi';
+      config.publicPath = 'Projects/Ionic/Stencil';
+      expect(core.getAppPublicPath(config)).toEqual('Projects/Ionic/Stencil/willywendleswetwasabi/');
+    });
 
+    it('handles windows paths', () => {
+      config.namespace = 'WillyWendLeSWeTWasaBi';
+      config.publicPath = 'Projects\\Ionic\\Stencil';
+      expect(core.getAppPublicPath(config)).toEqual('Projects/Ionic/Stencil/willywendleswetwasabi/');
+    });
   });
 
   describe('wrapCoreJs', () => {

@@ -1,8 +1,15 @@
+import { BuildConfig } from '../../../util/interfaces';
+import { mockStencilSystem } from '../../../test';
+
 import * as core from '../app-core';
 
 describe('app-core', () => {
-  it('exists', () => {
-    expect(core).toBeTruthy();
+  let config: BuildConfig;
+
+  beforeEach(() => {
+    config = {
+      sys: mockStencilSystem()
+    };
   });
 
   describe('generateCore', () => {
@@ -14,7 +21,10 @@ describe('app-core', () => {
   });
 
   describe('getAppFileName', () => {
-
+    it('returns the lower-cased namespace', () => {
+      config.namespace = 'BarnAcleBobSBigBoaTs';
+      expect(core.getAppFileName(config)).toEqual('barnaclebobsbigboats');
+    });
   });
 
   describe('getAppPublicPath', () => {
